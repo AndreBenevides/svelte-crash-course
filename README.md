@@ -103,3 +103,68 @@ Then, from within your project folder:
 npm run build
 surge public my-project.surge.sh
 ```
+
+
+## My own notes
+### Add actions
+`<button on:click={yourActionHere}>click me</button>`
+
+### Bind properties
+`bind:<tag_property>={<variable_name>}`
+`<input type="number" bind:value={points}/>`
+
+### Conditional code
+`{#if yourCondition}
+	<your true condition html>
+{:else}
+	<your false condition html>
+{/if}`
+
+### Iterate through arrays
+The next example iterates through the array "players" and for each player initiates a new Player component and passes the name and points attributes:
+{#each players as player}
+	<Player name={player.name} points={player.points} />
+{/each}
+
+In the player component you need to export name and points so that the component actually takes the value you passed.
+
+
+### To create a component
+Simply create a new .svelte file in the src folder:
+`YourComponent.svelte`
+
+### To import a component into another component
+Inside <script>:
+`import YourComponent from './YourComponent.svelte'`
+  
+After your component is imported you can place it wherever you want like so:
+`<div class="container">
+<YourComponent />
+...
+</div>`
+
+### To broadcast an event through components you need to use the event dispatcher from svelte:
+In the <script>:
+`import { CreateEventDispatcher } from 'svelte';
+const dispatch = CreateEventDispatcher();`
+  
+When you want to fire a new event:
+`dispatch("addplayer", player);`
+
+This will fire the event "addplayer" and pass the player object as the event value.
+ 
+In the other component where you expect to handle the events you need to:
+`<AddPlayer on:addplayerevent={addPlayer}/>`
+
+This will execute your function "addPlayer" when the event "addplayerevent" is fired inside the AddPlayer component.
+To get the value passed on the event you need to read the variable "detail":
+`
+const addPlayer = (e) => {
+	const newPlayer = e.detail;
+	//players.push(newPlayer) will not work because the objects are immutable.
+	players = [...players, newPlayer];
+}
+`
+
+
+
