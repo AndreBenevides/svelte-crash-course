@@ -122,52 +122,54 @@ surge public my-project.surge.sh
 
 ### Iterate through arrays
 The next example iterates through the array "players" and for each player initiates a new Player component and passes the name and points attributes:
-`
+```
 {#each players as player}
 	<Player name={player.name} points={player.points} />
 {/each}
-`
+```
 In the player component you need to export name and points so that the component actually takes the value you passed.
 
 
 ### To create a component
 Simply create a new .svelte file in the src folder:
-`YourComponent.svelte`
+```YourComponent.svelte```
 
 ### To import a component into another component
 Inside 'script' tag: 
-`import YourComponent from './YourComponent.svelte'`
+```import YourComponent from './YourComponent.svelte'```
   
 After your component is imported you can place it wherever you want like so:
-`
+```
 div class="container">
 YourComponent />
 ...
 /div>
-`
+```
 
 ### To broadcast an event through components you need to use the event dispatcher from svelte:
 In the 'script' tag:
-`import { CreateEventDispatcher } from 'svelte';
-const dispatch = CreateEventDispatcher();`
+```
+import { CreateEventDispatcher } from 'svelte';
+const dispatch = CreateEventDispatcher();
+```
   
 When you want to fire a new event:
-`dispatch("addplayer", player);`
+```dispatch("addplayer", player);```
 
 This will fire the event "addplayer" and pass the player object as the event value.
  
 In the other component where you expect to handle the events you need to:
-`<AddPlayer on:addplayerevent={addPlayer}/>`
+```<AddPlayer on:addplayerevent={addPlayer}/>```
 
 This will execute your function "addPlayer" when the event "addplayerevent" is fired inside the AddPlayer component.
 To get the value passed on the event you need to read the variable "detail":
-`
+```
 const addPlayer = (e) => {
 	const newPlayer = e.detail;
-	//players.push(newPlayer) will not work because the objects are immutable.
+	//players.push(newPlayer); will not work because the objects are immutable.
 	players = [...players, newPlayer];
 }
-`
+```
 
 
 
