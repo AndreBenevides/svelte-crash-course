@@ -135,18 +135,19 @@ Simply create a new .svelte file in the src folder:
 `YourComponent.svelte`
 
 ### To import a component into another component
-Inside <script>: import YourComponent from './YourComponent.svelte'
+Inside 'script' tag: 
+`import YourComponent from './YourComponent.svelte'`
   
 After your component is imported you can place it wherever you want like so:
 `
-<div class="container">
-<YourComponent />
+div class="container">
+YourComponent />
 ...
-</div>
+/div>
 `
 
 ### To broadcast an event through components you need to use the event dispatcher from svelte:
-In the <script>:
+In the 'script' tag:
 `import { CreateEventDispatcher } from 'svelte';
 const dispatch = CreateEventDispatcher();`
   
