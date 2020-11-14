@@ -122,10 +122,11 @@ surge public my-project.surge.sh
 
 ### Iterate through arrays
 The next example iterates through the array "players" and for each player initiates a new Player component and passes the name and points attributes:
+`
 {#each players as player}
 	<Player name={player.name} points={player.points} />
 {/each}
-
+`
 In the player component you need to export name and points so that the component actually takes the value you passed.
 
 
@@ -134,14 +135,15 @@ Simply create a new .svelte file in the src folder:
 `YourComponent.svelte`
 
 ### To import a component into another component
-Inside <script>:
-`import YourComponent from './YourComponent.svelte'`
+Inside <script>: import YourComponent from './YourComponent.svelte'
   
 After your component is imported you can place it wherever you want like so:
-`<div class="container">
+`
+<div class="container">
 <YourComponent />
 ...
-</div>`
+</div>
+`
 
 ### To broadcast an event through components you need to use the event dispatcher from svelte:
 In the <script>:
